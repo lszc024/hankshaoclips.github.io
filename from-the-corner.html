@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>绝处逢生 – Hank.Shao</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    html, body {
+      background-color: rgb(0, 0, 0);
+      color-scheme: light dark;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .detail-section {
+      max-width: 1200px;
+      margin: 160px auto 80px;
+      padding: 0 20px;
+      overflow: hidden;
+    }
+
+    .video-container {
+      aspect-ratio: 16 / 9;
+      background: black;
+      margin-bottom: 90px;
+      border-radius: 1px;
+      margin-top: 2.5em;
+      overflow: hidden;
+    }
+
+    .video-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: brightness(0.95) contrast(1.15);
+    }
+
+    .back-button {
+      position: fixed;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 0.8em 0.8em;
+      text-decoration: none;
+      font-size: 1em;
+      z-index: 100;
+      transition: all 0.4s ease;
+      padding-left: 20px;
+      backdrop-filter: blur(5px);
+      width: 40px;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .back-button:hover {
+      width: 200px;
+      background: rgba(255,255,255,0.1);
+      color: white;
+    }
+
+    .back-button::before {
+      content: "<";
+      font-size: 1.2em;
+      display: inline-block;
+      margin-right: 10px;
+      margin-bottom: 6px;
+      transition: transform 0.4s ease;
+    }
+
+    .back-button:hover::before {
+      transform: translateX(5px);
+    }
+
+    .main-title {
+      font-size: 5em;
+      font-weight: bold;
+      margin-bottom: 0.6em;
+      color: white;
+      margin-top: -0.9em;
+      margin-bottom: 0.3em;
+    }
+
+    .film-meta {
+      font-size: 0.9em;
+      color: #bbb;
+      margin-bottom: 1.5em;
+    }
+
+    .info-columns {
+      display: flex;
+      flex-direction: row;
+      gap: 250px;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .left-col {
+      flex: 0.9;
+      min-width: 300px;
+    }
+
+    .right-col {
+      flex: 0.8;
+      transform: translateY(-50px);
+    }
+
+    .left-col p {
+      margin-bottom: 1.5em;
+      color: #ccc;
+      line-height: 1.7em;
+    }
+
+    .right-col h3 {
+      color: white;
+      font-size: 1.2em;
+      margin-top: 0.4em;
+      margin-bottom: 0.6em;
+    }
+
+    .right-col p {
+      color: #ccc;
+      line-height: 1.6em;
+      font-size: 0.95em;
+      margin-bottom: 1.6em;
+      text-align: justify;
+    }
+
+    .intro {
+      font-style: italic;
+      color: #ccc;
+      margin-top: 1em;
+      margin-bottom: 1.8em;
+      line-height: 1.7em;
+    }
+
+    .divider {
+      border: none;
+      height: 1px;
+      width: 60%;
+      background: rgba(254, 254, 254, 0.886);
+      margin: 2em 0;
+    }
+
+    .screenshot-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 0.1em 2em;
+      margin: 15em 5vw;
+    }
+
+    .screenshot-grid img {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      border-radius: 1px;
+      background: #222;
+    }
+
+    .screenshot-fullwidth {
+      width: 100vw;
+      background: black;
+      margin-left: calc(-1 * ((100vw - 100%) / 2));
+    }
+    .award-list {
+  list-style-type: disc;
+  padding-left: 1em;
+  margin: 0 0 1.6em 0;
+  color: #ccc;
+  font-size: 0.95em;
+}
+
+.award-list li {
+  margin-bottom: 0.5em;
+  line-height: 1.6em;
+  text-indent: 0;
+}
+.stills-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2em;
+  margin-top: 2em;
+}
+
+.stills-column img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  
+  background: #111;
+}
+
+
+  </style>
+</head>
+
+<body data-page="film-work">
+  <div class="navbar">
+    <div class="logo">
+      <a href="index.html">
+        <img src="images/logo.png" alt="Logo" class="logo-img" />
+      </a>
+    </div>
+
+    <div class="nav-links">
+      <a href="index.html" class="nav-link" data-page="home">Home</a>
+      <a href="film-work.html" class="nav-link" data-page="film-work">Film Work</a>
+      <a href="moments.html" class="nav-link" data-page="moments">Moments</a>
+      <a href="photography.html" class="nav-link" data-page="photography">Photography</a>
+      <a href="about.html" class="nav-link" data-page="about">About</a>
+      <div class="nav-underline"></div>
+    </div>
+  </div>
+
+  <a href="film-work.html" class="back-button">Back to Film Work</a>
+
+  <div class="detail-section">
+    <div class="video-container">
+      <img src="covers/from-the-corner.jpg" alt="超级邻居封面图">
+    </div>
+
+    <div class="main-title">绝处逢生</div>
+    <div class="film-meta">篮球运动主题叙事短片｜2024.12｜10min</div>
+
+    <div class="info-columns">
+      <div class="left-col">
+        <p class="intro">
+          <em>江北大学球员汤晟在之前的关键比赛中错失了一记制胜的底角三分球，导致球队无法晋级，也给他的心理蒙上了一层阴影。
+            附加赛是江北大学晋级的最后希望，但面对强大的对手和内心的压力，汤晟难以发挥出最佳水平。
+            巨大的分差和紧张的内部态势让江北大学濒临被淘汰的边缘。然而，他们的教练及时指出了问题，并稳定了军心，得以让汤晟放下了沉痛的过去，给予队伍再战的信心。
+            随后，江北大学队气势如虹，在最后一攻中，汤晟再次获得底角三分的出手机会。这次，球进了，唐汤晟完成了自我救赎，也帮助球队成功晋级。
+            </em>
+        </p>
+        <hr class="divider" />
+        <p><strong>我的职位：</strong><br>导演｜编剧｜摄影指导（部分）｜剪辑</p>
+        <p><strong>出演：</strong><br> 吴郅睿 饰 汤　晟<br>刘⼦明 饰 教　练<br>张裕杰 饰 杨志豪<br>曾　骏 饰 张　隆<br>参与演出<br>王　童 项俊诚 贵德⼲ 潘炳屹 商　桐<br>
+          李博⽂ 汪海黎 李伯男 俞致远 
+          王　帅<br> 赖　华 王俊韬 王汉斌 刘云天
+          蒋昊宸<br> 袁德宇 范蒋埼 朱梓豪 
+          温志伟 陈⺠利</p>
+        <p><strong>团队：</strong><br>制⽚ 　　周　智<br>执⾏制⽚ 王海浪<br>⽣活制⽚ 陈翰扬<br>监制 　　郭之然<br>导演助理 蒋昊宸 吴泽悦 傅瑀璁<br>摄影指导 徐昕昱<br>摄影师　 吴君毅 杨　坤 单禹颉 沈　凌<br>焦点员　 刘国武 ⾼⼤峰 李晴天 王仁杰<br>摄影助理 周凤涛 徐慧超
+          <br>灯光师 　刘攀想
+          <br>灯光助理 童正德 曾　超 ⻢　响<br>录⾳师　 周　斌<br>话筒员　 葛闯闯<br>美术指导 吴泽悦 邵琦涵
+          <br>执⾏美术 蒋昊宸<br>DIT 　　 ⽶　勒<br>调⾊　　 何　佳<br>声效混⾳ 陈基伟<br>
+          ⾳乐总监 蔡祉荣<br>
+          编曲作曲 蔡祉荣 范增根 MulaGroove<br>
+          </p>
+        <p><strong>设备：</strong><br>ARRI Alexa Mini｜DJI Ronin4D 6K<br>Angenieux Type EZ-2 15-40mm T2.0<br>
+          Angenieux Type EZ-1 30-90mm T2.0<br>
+          Angenieux Optimo 28-340mm T3.2<br>
+          Angenieux Optimo 24-290mm T2.8<br>
+          Nisi Athena Cine Prime Lens 
+          （14/25/35/50/85）</p>
+      </div>
+
+      <div class="right-col">
+        <h3>获奖</h3>
+        <ul class="award-list">
+          <li><strong>American Golden Picture International Film Festival</strong> - First time Filmmaking｜Official Selection</li>
+          <li><strong>Monza Film Fest</strong> - Best Young Director｜Award Winner</li>
+          <li><strong>AltFF Alternative Film Festival</strong> - Short films｜Nominee</li>
+        </ul>
+        <h3>附言</h3>
+        <p>作为NBA球队金州勇士队的忠实球迷和他们当家球星克莱-汤普森的粉丝，我一直非常欣赏他精准的三分球技术。然而，在上赛季的附加赛中，勇士队不敌对手，最终被淘汰出局。克莱在那场比赛中也表现不佳，受到了很大的批评和质疑。这件事激发了我创作一部篮球主题短片《绝处逢生》的灵感。这部短片刻画并展现了一位年轻运动员面对压力和自我怀疑时的情感历程。
+
+          片名 “绝处逢生（From the Corner）”不仅象征着关键的决胜底角三分球，也代表着主人公和他的团队从失败和怀疑的 “困境”中挣扎而脱的过程。影片强调快节奏的剪辑和紧张的节奏，以反映主人公及其团队所感受到的压力和紧迫感。通过动态镜头和旋律不同的音乐，表达了主角汤晟面对濒临失败时的心理挣扎和最终的释放。
+          
+          我希望观众在观看本片后，能感受到篮球运动员所面临的压力和心理挑战，体验到篮球在场内外所带来的激情和精神。</p>
+          <h3>现场剧照</h3>
+<div class="stills-column">
+  <img src="stills/still1.jpg" alt="剧照1">
+  <img src="stills/still2.jpg" alt="剧照2">
+  <img src="stills/still3.jpg" alt="剧照3">
+  <img src="stills/still4.jpg" alt="剧照4">
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="screenshot-fullwidth">
+    <div class="screenshot-grid">
+      <img src="screenshots/from-the-corner/shot1.jpg" alt="截图1" />
+      <img src="screenshots/from-the-corner/shot2.jpg" alt="截图2" />
+      <img src="screenshots/from-the-corner/shot3.jpg" alt="截图3" />
+      <img src="screenshots/from-the-corner/shot4.jpg" alt="截图4" />
+      <img src="screenshots/from-the-corner/shot5.jpg" alt="截图5" />
+      <img src="screenshots/from-the-corner/shot6.jpg" alt="截图6" />
+    </div>
+  </div>
+
+  <script>
+    const navLinks = document.querySelectorAll(".nav-link");
+    const underline = document.querySelector(".nav-underline");
+    const currentPage = document.body.dataset.page;
+
+    function moveUnderlineTo(el) {
+      const offsetLeft = el.offsetLeft;
+      const width = el.offsetWidth;
+      underline.style.left = offsetLeft + "px";
+      underline.style.width = width + "px";
+    }
+
+    const matchedLink = Array.from(navLinks).find(link => link.dataset.page === currentPage);
+    if (matchedLink) {
+      matchedLink.classList.add("active");
+      moveUnderlineTo(matchedLink);
+    }
+
+    navLinks.forEach(link => {
+      link.addEventListener("mouseenter", () => moveUnderlineTo(link));
+    });
+
+    document.querySelector(".nav-links").addEventListener("mouseleave", () => {
+      const activeLink = document.querySelector(".nav-link.active");
+      if (activeLink) moveUnderlineTo(activeLink);
+    });
+  </script>
+
+<script>
+  function copyEmail() {
+    const email = "lszc024@163.com";
+    navigator.clipboard.writeText(email).then(() => {
+      const toast = document.getElementById("copyToast");
+      toast.classList.add("show");
+
+      // 自动隐藏
+      setTimeout(() => {
+        toast.classList.remove("show");
+      }, 1500);
+    }).catch(err => {
+      alert("复制失败：" + err);
+    });
+  }
+</script>
+
+
+
+  <footer class="site-footer">
+    <div class="footer-columns">
+      <div class="footer-logo-group">
+        <img src="images/logo.png" class="footer-logo" alt="Logo" />
+        <div class="footer-icon-row">
+          <div class="icon-wrapper">
+            <img src="images/wechat.png" class="footer-icon" alt="WeChat" />
+            <div class="icon-tooltip">
+              <img src="images/wechat-details.png" alt="WeChat Detail" />
+            </div>
+          </div>
+          <div class="icon-wrapper">
+            <img src="images/email.png" class="footer-icon" alt="email" />
+            <div class="icon-tooltip">
+              <img src="images/email-details.png" alt="Email Detail" />
+              <button class="copy-button" onclick="copyEmail()">复制</button>
+            </div>
+          </div>
+          <div class="icon-wrapper">
+            <a href="https://www.xinpianchang.com/u13185465?badge=&cate_id=0&order=default&role_id=&public_status=0&kw=" target="_blank">
+              <img src="images/xinpianchang.png" class="footer-icon" alt="Xinpianchang" />
+            </a>
+            <div class="icon-tooltip">
+              <img src="images/xinpianchang-details.png" alt="XPC Detail" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-right-columns">
+        <div class="footer-column">
+          <h4>2024 WORKS</h4>
+          <ul>
+            <li><a href="from-the-corner.html">绝处逢生</a></li>
+      <li><a href="youth-never-ends.html">青春不散场</a></li>
+      <li><a href="change-starts-now.html">改变 就现在</a></li>
+      <li><a href="chao-neng.html">超能-助力不凡的你</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>2023 WORKS</h4>
+          <ul>
+            <li><a href="blue-of-nbut.html">宁工蓝</a></li>
+            <li><a href="live-at-yunhu.html">隐居云湖</a></li>
+            <li><a href="wang-wang-miao.html">汪汪喵</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>MOMENTS</h4>
+          <ul>
+            <li><a href="moments.html#college">校园</a></li>
+            <li><a href="moments.html#travel">旅途</a></li>
+            <li><a href="moments.html#nature">自然</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>PHOTOGRAPHY</h4>
+          <ul>
+            <li><a href="photography.html#blue">蓝</a></li>
+            <li><a href="photography.html#orange">橙</a></li>
+            <li><a href="photography.html#green">绿</a></li>
+            <li><a href="photography.html#gray">灰</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <div id="copyToast" class="copy-toast">邮箱地址已复制</div>
+
+</body>
+</html>

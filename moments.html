@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Moments – Hank.Shao</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      background: black;
+      color: white;
+      margin: 0;
+      
+    }
+
+    .section {
+      width: 100%;
+      padding: 160px 40px 80px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 4em;
+      letter-spacing: 6px;
+      margin-top: 1em;
+      font-weight: normal;
+    }
+
+    .moment-block {
+      margin-bottom: 10em;
+      overflow: hidden;
+      position: relative;
+      transform: scale(0.8); /* 缩小至90% */
+    }
+
+    .moment-block h2 {
+      font-size: 2.5em;
+      letter-spacing: 4px;
+      margin-bottom: 1.5em;
+      text-align: right;
+      padding-left: 10px;
+      text-transform: uppercase;
+    }
+
+    .moment-grid-wrapper {
+  width: 100vw; /* 默认是全屏 */
+  max-width: 150%;
+  overflow: hidden;
+  position: relative;
+  padding: 0 60px; /* 可选：左右内边距 */
+}
+
+
+.moment-grid-wrapper::before,
+.moment-grid-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 150px; /* 调整渐变宽度 */
+  height: 100%;
+  z-index: 2;
+  pointer-events: none; /* 不遮挡按钮 */
+}
+
+.moment-grid-wrapper::before {
+  left: 0;
+  background: linear-gradient(to right,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0.9) 20%,
+    rgba(0, 0, 0, 0.6) 40%,
+    rgba(0, 0, 0, 0.3) 60%,
+    rgba(0, 0, 0, 0.1) 80%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  width: 220px;
+}
+
+.moment-grid-wrapper::after {
+  right: 0;
+  background: linear-gradient(to left,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0.9) 20%,
+    rgba(0, 0, 0, 0.6) 40%,
+    rgba(0, 0, 0, 0.3) 60%,
+    rgba(0, 0, 0, 0.1) 80%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  width: 220px;
+}
+
+
+
+
+    .moment-track {
+      display: flex;
+      gap: 4em;
+      will-change: transform;
+      position: relative;
+      left: 0;
+    }
+
+    .moment-item {
+      background: #222;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+      flex: 0 0 auto;
+      width: 400px;
+      height: 600px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .moment-item.horizontal {
+      width: calc(600px * 16 / 9);
+      height: 600px;
+    }
+
+    
+
+
+    .moment-item video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .moment-item::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4); /* 半透明黑遮罩 */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.moment-item:hover::after {
+  opacity: 1;
+}
+
+.moment-overlay-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 3em;
+  font-weight: 600;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.moment-item:hover .moment-overlay-center {
+  opacity: 1;
+}
+
+.overlay-text {
+  color: white;
+  text-align: center;
+  font-size: 1.1em;
+  line-height: 1.5;
+}
+
+.caption-text {
+  font-weight: bold;
+  white-space: nowrap; /* 阻止换行 */
+  
+  max-width: none;
+
+  
+  margin: 0 auto;
+}
+
+.year-text {
+  opacity: 0.8;
+  font-size: 0.5em;
+}
+    .scroll-button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-10%);
+      z-index: 2;
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      color: white;
+      font-size: 2em;
+      padding: 0.5em 0.8em;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .scroll-button:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .scroll-left { left: 10px; }
+    .scroll-right { right: 10px; }
+
+    #college, #travel, #nature {
+  scroll-margin-top: 100px;
+}
+
+.fullscreen-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.video-popup {
+  width: 80%;
+  max-width: 960px;
+  background: black;
+  position: relative;
+}
+
+.video-popup video {
+  width: 100%;
+  height: auto;
+}
+
+.close-popup {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(255,255,255,0.1);
+  color: white;
+  border: none;
+  padding: 0.5em 1em;
+  cursor: pointer;
+}
+  
+  </style>
+</head>
+<body data-page="moments">
+  <div class="navbar">
+    <div class="logo">
+      <a href="index.html">
+        <img src="images/logo.png" alt="Logo" class="logo-img" />
+      </a>
+    </div>
+    
+    <div class="nav-links">
+      <a href="index.html" class="nav-link" data-page="home">Home</a>
+      <a href="film-work.html" class="nav-link" data-page="film-work">Film Work</a>
+      <a href="moments.html" class="nav-link" data-page="moments">Moments</a>
+      <a href="photography.html" class="nav-link" data-page="photography">Photography</a>
+      <a href="about.html" class="nav-link" data-page="about">About</a>
+      <div class="nav-underline"></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h1>MOMENTS</h1>
+
+    <div class="moment-block" id="college">
+      <h2>College</h2>
+      
+      <button class="scroll-button scroll-right" onclick="scrollTrack('college', 600)">&#8250;</button>
+      <div class="moment-grid-wrapper">
+        <div class="moment-track" id="college-track"></div>
+      </div>
+    </div>
+
+    <div class="moment-block" id="travel">
+      <h2>Travel</h2>
+      
+      <button class="scroll-button scroll-right" onclick="scrollTrack('travel', 600)">&#8250;</button>
+      <div class="moment-grid-wrapper">
+        <div class="moment-track" id="travel-track"></div>
+      </div>
+    </div>
+
+    <div class="moment-block" id="nature">
+      <h2>Nature</h2>
+      
+      <button class="scroll-button scroll-right" onclick="scrollTrack('nature', 600)">&#8250;</button>
+      <div class="moment-grid-wrapper">
+        <div class="moment-track" id="nature-track"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function copyEmail() {
+      const email = "lszc024@163.com";
+      navigator.clipboard.writeText(email).then(() => {
+        const toast = document.getElementById("copyToast");
+        toast.classList.add("show");
+  
+        // 自动隐藏
+        setTimeout(() => {
+          toast.classList.remove("show");
+        }, 1500);
+      }).catch(err => {
+        alert("复制失败：" + err);
+      });
+    }
+  </script>
+  
+  
+  
+    <footer class="site-footer">
+      <div class="footer-columns">
+        <div class="footer-logo-group">
+          <img src="images/logo.png" class="footer-logo" alt="Logo" />
+          <div class="footer-icon-row">
+            <div class="icon-wrapper">
+              <img src="images/wechat.png" class="footer-icon" alt="WeChat" />
+              <div class="icon-tooltip">
+                <img src="images/wechat-details.png" alt="WeChat Detail" />
+              </div>
+            </div>
+            <div class="icon-wrapper">
+              <img src="images/email.png" class="footer-icon" alt="email" />
+              <div class="icon-tooltip">
+                <img src="images/email-details.png" alt="Email Detail" />
+                <button class="copy-button" onclick="copyEmail()">复制</button>
+              </div>
+            </div>
+            <div class="icon-wrapper">
+              <a href="https://www.xinpianchang.com/u13185465?badge=&cate_id=0&order=default&role_id=&public_status=0&kw=" target="_blank">
+                <img src="images/xinpianchang.png" class="footer-icon" alt="Xinpianchang" />
+              </a>
+              <div class="icon-tooltip">
+                <img src="images/xinpianchang-details.png" alt="XPC Detail" />
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <div class="footer-right-columns">
+          <div class="footer-column">
+            <h4>2024 WORKS</h4>
+            <ul>
+              <li><a href="from-the-corner.html">绝处逢生</a></li>
+        <li><a href="youth-never-ends.html">青春不散场</a></li>
+        <li><a href="change-starts-now.html">改变 就现在</a></li>
+        <li><a href="chao-neng.html">超能-助力不凡的你</a></li>
+            </ul>
+          </div>
+  
+          <div class="footer-column">
+            <h4>2023 WORKS</h4>
+            <ul>
+              <li><a href="blue-of-nbut.html">宁工蓝</a></li>
+              <li><a href="live-at-yunhu.html">隐居云湖</a></li>
+              <li><a href="wang-wang-miao.html">汪汪喵</a></li>
+            </ul>
+          </div>
+  
+          <div class="footer-column">
+            <h4>MOMENTS</h4>
+            <ul>
+              <li><a href="moments.html#college">校园</a></li>
+              <li><a href="moments.html#travel">旅途</a></li>
+              <li><a href="moments.html#nature">自然</a></li>
+            </ul>
+          </div>
+  
+          <div class="footer-column">
+            <h4>PHOTOGRAPHY</h4>
+            <ul>
+              <li><a href="photography.html#blue">蓝</a></li>
+              <li><a href="photography.html#orange">橙</a></li>
+              <li><a href="photography.html#green">绿</a></li>
+              <li><a href="photography.html#gray">灰</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <div id="copyToast" class="copy-toast">邮箱地址已复制</div>
+  <script>
+    window.addEventListener("DOMContentLoaded", () => {
+      const navLinks = document.querySelectorAll(".nav-link");
+      const underline = document.querySelector(".nav-underline");
+      const currentPage = document.body.dataset.page;
+  
+      function moveUnderlineTo(el) {
+        const offsetLeft = el.offsetLeft;
+        const width = el.offsetWidth;
+        underline.style.left = offsetLeft + "px";
+        underline.style.width = width + "px";
+      }
+  
+      const matchedLink = Array.from(navLinks).find(link => link.dataset.page === currentPage);
+      if (matchedLink) {
+        matchedLink.classList.add("active");
+        moveUnderlineTo(matchedLink);
+      }
+  
+      navLinks.forEach(link => {
+        link.addEventListener("mouseenter", () => moveUnderlineTo(link));
+      });
+  
+      document.querySelector(".nav-links").addEventListener("mouseleave", () => {
+        const activeLink = document.querySelector(".nav-link.active");
+        if (activeLink) moveUnderlineTo(activeLink);
+      });
+    });
+  </script> 
+  <script>
+    const videoData = {
+      college: [
+      {
+    preview: 'videos/moments/preview/collegetimelapse-1.mp4',
+    full: 'videos/moments/collegetimelapse.mov',
+    caption: '校园延时摄影',
+    type: 'horizontal',
+    year: '2023.02'
+  },
+  {
+    preview: 'videos/moments/preview/filmworkvlog-1.mp4',
+    full: 'videos/moments/filmworkvlog.mov',
+    caption: '剧组vlog',
+    type: 'vertical',
+    year: '2024.05'
+  },
+  {
+    preview: 'videos/moments/preview/drone-1.mp4',
+    full: 'videos/moments/drone.mov',
+    caption: '鹭林河的夕阳',
+    type: 'horizontal',
+    year: '2024.11'
+  },
+  {
+    preview: 'videos/moments/preview/dancepart-1.mp4',
+    full: 'videos/moments/dancepart.mov',
+    caption: '超能-街舞Part',
+    type: 'horizontal',
+    year: '2024.05'
+  }
+      ],
+      travel: [
+      {
+    preview: 'videos/moments/preview/thailand1-1.mp4',
+    full: 'videos/moments/thailand1.mov',
+    caption: '泰国团建vlog（1）',
+    type: 'horizontal',
+    year: '2023.06'
+  },
+  {
+    preview: 'videos/moments/preview/thailand2-1.mp4',
+    full: 'videos/moments/thailand2.mov',
+    caption: '泰国团建vlog（2）',
+    type: 'horizontal',
+    year: '2023.06'
+  },
+  {
+    preview: 'videos/moments/preview/taizhoufu-1.mp4',
+    full: 'videos/moments/taizhoufu.mov',
+    caption: '台州府',
+    type: 'horizontal',
+    year: '2023.04'
+  },
+  {
+    preview: 'videos/moments/preview/hongkong-1.mp4',
+    full: 'videos/moments/hongkong.mov',
+    caption: '香港速通',
+    type: 'vertical',
+    year: '2024.12'
+  },
+  {
+    preview: 'videos/moments/preview/snowymountain-1.mp4',
+    full: 'videos/moments/snowymountain.mov',
+    caption: '四姑娘山攀登',
+    type: 'vertical',
+    year: '2024.02'
+  },
+  {
+    preview: 'videos/moments/preview/birthdaywinter-1.mp4',
+    full: 'videos/moments/birthdaywinter.mov',
+    caption: '冬天生日郊游',
+    type: 'horizontal',
+    year: '2024.02'
+  }
+      ],
+      nature: [
+      {
+    preview: 'videos/moments/preview/lanzhounight-1.mp4',
+    full: 'videos/moments/lanzhounight.mov',
+    caption: '兰州夜景延时',
+    type: 'horizontal',
+    year: '2023.02'
+  },
+  {
+    preview: 'videos/moments/preview/dawn-1.mp4',
+    full: 'videos/moments/dawn.mov',
+    caption: '三则日出延时摄影',
+    type: 'horizontal',
+    year: '2023.04-09'
+  }, 
+  {
+    preview: 'videos/moments/preview/huanghesunset-1.mp4',
+    full: 'videos/moments/huanghesunset.mov',
+    caption: '黄河日落延时摄影',
+    type: 'horizontal',
+    year: '2023.02'
+  },
+  {
+    preview: 'videos/moments/preview/xizang-1.mp4',
+    full: 'videos/moments/xizang.mov',
+    caption: '西藏延时摄影',
+    type: 'horizontal',
+    year: '2024.08'
+  }
+      ]
+    };
+
+    function populateTrack(section) {
+  const track = document.getElementById(`${section}-track`);
+  const videos = [...videoData[section], ...videoData[section]];
+
+  videos.forEach(({ preview, full, caption, type, year }) => {
+    const item = document.createElement('div');
+    item.className = 'moment-item' + (type === 'horizontal' ? ' horizontal' : '');
+    item.innerHTML = `
+      <video src="${preview}" muted loop autoplay></video>
+      <div class="moment-overlay-center">
+        <div class="overlay-text">
+          <div class="caption-text">${caption}</div>
+          <div class="year-text">${year}</div>
+        </div>
+      </div>
+    `;
+    item.addEventListener('click', () => openFullVideo(full));
+    track.appendChild(item);
+  });
+
+  startLoopScroll(track, section);
+}
+
+const trackStates = {};
+
+function startLoopScroll(track, section) {
+  trackStates[section] = {
+    baseSpeed: 0.9,
+    boostSpeed: 0,
+    x: 0
+  };
+
+  const loop = () => {
+    const state = trackStates[section];
+    state.x -= (state.baseSpeed + state.boostSpeed);
+    state.boostSpeed *= 0.9;
+    
+    if (Math.abs(state.x) >= track.scrollWidth / 2) {
+      state.x = 0;
+    }
+    
+    track.style.transform = `translateX(${state.x}px)`;
+    requestAnimationFrame(loop);
+  };
+  
+  loop();
+}
+
+function scrollTrack(section) {
+  const state = trackStates[section];
+  state.boostSpeed += 100; // 点击时增加15px/秒的瞬时速度
+}
+
+// 其余函数（openFullVideo等）保持不变
+
+function openFullVideo(fullSrc) {
+  const overlay = document.createElement('div');
+  overlay.className = 'fullscreen-overlay';
+  overlay.innerHTML = `
+    <div class="video-popup">
+      <video src="${fullSrc}" controls autoplay></video>
+      <button class="close-popup">关闭</button>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+
+  const videoEl = overlay.querySelector("video");
+
+  // Try to enter fullscreen
+  if (videoEl.requestFullscreen) {
+    videoEl.requestFullscreen();
+  } else if (videoEl.webkitRequestFullscreen) {
+    videoEl.webkitRequestFullscreen();
+  } else if (videoEl.msRequestFullscreen) {
+    videoEl.msRequestFullscreen();
+  }
+
+  overlay.querySelector('.close-popup').onclick = () => {
+    document.body.removeChild(overlay);
+  };
+}
+
+document.addEventListener('fullscreenchange', () => {
+  if (!document.fullscreenElement) {
+    const overlay = document.querySelector('.fullscreen-overlay');
+    if (overlay) {
+      document.body.removeChild(overlay);
+    }
+  }
+});
+
+// Initialize all tracks
+document.addEventListener('DOMContentLoaded', () => {
+  populateTrack('college');
+  populateTrack('travel');
+  populateTrack('nature');
+});
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const hash = window.location.hash;
+      if (hash) {
+        const target = document.querySelector(hash);
+        if (target) {
+          setTimeout(() => {
+            const navbarHeight = document.querySelector('.navbar').offsetHeight || 80; // 导航栏高度
+            const targetTop = target.getBoundingClientRect().top + window.scrollY; // 目标元素到页面顶部的距离
+            window.scrollTo({
+              top: targetTop - navbarHeight - window.innerHeight * 0.1, // 减去导航栏高度，再留10%屏幕顶部空隙
+              behavior: 'smooth'
+            });
+          }, 300); // 稍微等更久一点，确保布局稳定
+        }
+      }
+    });
+    </script>
+</body>
+</html>

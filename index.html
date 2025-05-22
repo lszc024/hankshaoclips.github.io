@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.loli.net/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      
+      scroll-behavior: smooth;
+      background-color: black;
+      color: white;   
+    }
+
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+     
+    }
+
+
+
+    .hero-bg {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      transition: opacity 1s ease-in-out;
+      margin-bottom: 0;
+    }
+
+    .hero img:nth-of-type(1) { animation-delay: 0s; }
+    .hero img:nth-of-type(2) { animation-delay: 5s; }
+    .hero img:nth-of-type(3) { animation-delay: 10s; }
+    .hero img:nth-of-type(4) { animation-delay: 15s; }
+    .hero img:nth-of-type(5) { animation-delay: 20s; }
+    .hero img:nth-of-type(6) { animation-delay: 25s; }
+    .hero img:nth-of-type(7) { animation-delay: 30s; }
+    .hero img:nth-of-type(8) { animation-delay: 35s; }
+    .hero img:nth-of-type(9) { animation-delay: 40s; }
+ 
+    @keyframes fade {
+      0%   { opacity: 0; }
+      5%   { opacity: 1; }
+      45%  { opacity: 1; }
+      50%  { opacity: 0; }
+      100% { opacity: 0; }
+    }
+
+    
+
+
+    
+
+    .intro-text {
+      position: absolute;
+      top: 49%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: 5em;
+      text-align: center;
+      z-index: 5;
+      line-height: 1.2;
+      font-family: 'Helvetica Neue', sans-serif;
+      text-transform: uppercase;
+
+    }
+
+    .intro-line1 {
+     font-size: 1em;
+     font-weight: 600;
+     letter-spacing: 0.1em;
+     margin: 0;
+     line-height: 0.8; 
+     color: white;
+    }
+
+    .intro-line2 {
+     font-size: 0.4em;
+     font-weight: 200;
+     letter-spacing: 0.1em;
+     font-family: "Poppins", sans-serif;
+     font-weight: 200;
+     font-style: normal;
+     margin: 0em;
+     line-height: 1.2;
+     color: white;
+     font-stretch: 110%;
+    } 
+
+    .section {
+      padding: 80px 20px;
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: black;
+      color: white;    
+    }
+
+    .showreel {
+     position: relative;
+     width: 100vw;
+     height: 100vh;
+     overflow: hidden;
+     background-color: rgb(0, 0, 0);
+     margin-top: 0;
+    }
+    .showreel video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.showreel-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 100vw;
+  aspect-ratio: 2.39 / 1;
+  margin: 0 auto;
+  background: black;
+  overflow: hidden;
+}
+
+.showreel-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  text-align: center;
+  color: white;
+  pointer-events: none; /* 避免挡住视频按钮 */
+}
+
+.showreel-title {
+  font-size: 2.5em;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-family: "Poppins", sans-serif;
+  margin-bottom: 0em;
+}
+
+.play-button {
+  pointer-events: auto;
+  font-size: 1em;
+  padding: 0.5em 1.4em;
+  border: 2px solid white;
+  background: transparent;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: bold;
+}
+
+.showreel-box:fullscreen {
+  object-fit: contain;
+  background-color: black;
+}
+
+.showreel-box:-webkit-full-screen {
+  object-fit: contain;
+  background-color: black;
+}
+
+
+.play-button:hover {
+  background: white;
+  color: black;
+}
+
+.film-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 40px;
+  margin-top: 2em;
+}
+
+.film-card {
+  background: #111;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  transition: transform 0.3s ease;
+}
+
+.film-card:hover {
+  transform: translateY(-5px);
+}
+
+.video-wrapper {
+  width: 100%;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+  background: black;
+}
+
+.video-wrapper video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: opacity 0.3s ease;
+}
+
+.intro-block {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 2em;
+  padding: 4em 5vw;
+  
+  background-color: black;
+  color: white;
+  flex-wrap: wrap;
+}
+
+.intro-image img {
+  max-width: 250px;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  margin-top: 20px;   /* 向下移动 */
+  margin-right: 200px;  /* 向右移动 */
+}
+
+.intro-text-block {
+  max-width: 900px;
+  font-size: 1.05em;
+  line-height: 2.5;
+  margin-top: 70px;   /* 向下移动 */
+  margin-right: 30px;
+  letter-spacing: 0.04em;
+  font-family: 'Poppins', sans-serif;
+}
+
+.underline-link {
+  text-decoration: underline;
+  color: white;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.underline-link:hover {
+  color: #999;
+}
+
+  </style>
+</head>
+<body data-page="home">
+  <div class="hero" id="home">
+    <div class="navbar">
+      <div class="logo">
+        <a href="index.html">
+          <img src="images/logo.png" alt="Logo" class="logo-img" />
+        </a>
+      </div>
+      
+        <div class="nav-links">
+          <a href="index.html" class="nav-link" data-page="home">Home</a>
+          <a href="film-work.html" class="nav-link" data-page="film-work">Film Work</a>
+          <a href="moments.html" class="nav-link" data-page="moments">Moments</a>
+          <a href="photography.html" class="nav-link" data-page="photography">Photography</a>
+          <a href="about.html" class="nav-link" data-page="about">About</a>
+          <div class="nav-underline"></div>
+        </div>
+    </div>
+    <div class="intro-text">
+      <p class="intro-line1">Thank you</p>
+      <p class="intro-line2">for exploring my work</p>
+    </div>
+    <img id="slideshow1" class="hero-bg" src="images/frame1.jpg" alt="bg1">
+    <img id="slideshow2" class="hero-bg" src="images/frame2.jpg" alt="bg2">
+
+  </div>
+
+  <div class="showreel-wrapper" id="showreel">
+    <video
+      id="coverVideo"
+      class="showreel-box"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="auto"
+    >
+      <source src="videos/cover-loop.mp4" type="video/mp4" />
+    </video>
+  
+    <!-- 真正的 showreel 视频，初始隐藏 -->
+    <video
+      id="mainShowreel"
+      class="showreel-box"
+      preload="auto"
+      controls
+      playsinline
+      style="display: none;"
+    >
+      <source src="videos/showreel.mp4" type="video/mp4" />
+    </video>
+  
+    <!-- 悬浮播放按钮和文字 -->
+    <div class="showreel-overlay">
+      <div class="showreel-title">MY 2023–2024 SHOWREEL</div>
+      <button class="play-button" onclick="playShowreel()">PLAY</button>
+    </div>
+  </div>
+  
+ 
+  </section>
+  
+  
+
+  <div class="intro-block">
+    <div class="intro-image">
+      <img src="images/intro-head-image.png" alt="Intro Portrait" />
+    </div>
+    <div class="intro-text-block">
+      <p>I am an undergraduate student majoring in Advertising at a university in China. During my studies, I took on multiple roles including director, cinematographer, lighting designer, and editor, creating advertising shorts and promotional videos for my school and several small brands.</p>
+      <p>
+        <a href="film-work.html" class="underline-link">Click here</a> to get more details about my major film works. Additionally, you can explore some <a href="moments.html" class="underline-link">moments</a> in my daily life and my selected <a href="photography.html" class="underline-link">photography</a> works.
+      </p>
+    </div>
+  </div>
+  
+
+  <script>
+    window.addEventListener("DOMContentLoaded", () => {
+      const navLinks = document.querySelectorAll(".nav-link");
+      const underline = document.querySelector(".nav-underline");
+      const currentPage = document.body.dataset.page;
+  
+      function moveUnderlineTo(el) {
+        const offsetLeft = el.offsetLeft;
+        const width = el.offsetWidth;
+        underline.style.left = offsetLeft + "px";
+        underline.style.width = width + "px";
+      }
+  
+      const matchedLink = Array.from(navLinks).find(link => link.dataset.page === currentPage);
+      if (matchedLink) {
+        matchedLink.classList.add("active");
+        moveUnderlineTo(matchedLink);
+      }
+  
+      navLinks.forEach(link => {
+        link.addEventListener("mouseenter", () => moveUnderlineTo(link));
+      });
+  
+      document.querySelector(".nav-links").addEventListener("mouseleave", () => {
+        const activeLink = document.querySelector(".nav-link.active");
+        if (activeLink) moveUnderlineTo(activeLink);
+      });
+    });
+  </script>
+  
+  
+  
+  <script>
+    const images = [
+      "images/frame1.jpg",
+      "images/frame2.jpg",
+      "images/frame3.jpg",
+      "images/frame4.jpg",
+      "images/frame5.jpg",
+      "images/frame6.jpg",
+      "images/frame7.jpg",
+      "images/frame8.jpg"
+    ];
+  
+    let current = 0;
+    let showing = 1;
+  
+    const slideshow1 = document.getElementById("slideshow1");
+    const slideshow2 = document.getElementById("slideshow2");
+  
+    // 初始化
+    slideshow1.src = images[0];
+    slideshow1.style.opacity = 1;
+    slideshow2.style.opacity = 0;
+  
+    setInterval(() => {
+      current = (current + 1) % images.length;
+  
+      const nextImage = images[current];
+      const fadeOut = showing === 1 ? slideshow1 : slideshow2;
+      const fadeIn = showing === 1 ? slideshow2 : slideshow1;
+  
+      fadeIn.src = nextImage;
+      fadeIn.style.opacity = 1;
+      fadeOut.style.opacity = 0;
+  
+      showing = showing === 1 ? 2 : 1;
+    }, 5000);
+  </script>
+  
+  
+  <script>
+    function playShowreel() {
+      const cover = document.getElementById("coverVideo");
+      const main = document.getElementById("mainShowreel");
+  
+      cover.pause();
+      cover.style.display = "none";
+      main.style.display = "block";
+  
+      main.play();
+  
+      // 全屏播放
+      if (main.requestFullscreen) {
+        main.requestFullscreen();
+      } else if (main.webkitRequestFullscreen) {
+        main.webkitRequestFullscreen();
+      } else if (main.msRequestFullscreen) {
+        main.msRequestFullscreen();
+      }
+    }
+  
+    // ✅ 监听用户退出全屏（跨浏览器兼容）
+    document.addEventListener("fullscreenchange", onFullscreenExit);
+    document.addEventListener("webkitfullscreenchange", onFullscreenExit);
+    document.addEventListener("mozfullscreenchange", onFullscreenExit);
+    document.addEventListener("MSFullscreenChange", onFullscreenExit);
+  
+    function onFullscreenExit() {
+      const isFullScreen = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement;
+  
+      if (!isFullScreen) {
+        const cover = document.getElementById("coverVideo");
+        const main = document.getElementById("mainShowreel");
+  
+        // 当退出全屏时自动恢复封面
+        main.pause();
+        main.currentTime = 0;
+        main.style.display = "none";
+  
+        cover.style.display = "block";
+        cover.play();
+      }
+    }
+  </script>
+  <script>
+    function copyEmail() {
+      const email = "lszc024@163.com";
+      navigator.clipboard.writeText(email).then(() => {
+        const toast = document.getElementById("copyToast");
+        toast.classList.add("show");
+  
+        // 自动隐藏
+        setTimeout(() => {
+          toast.classList.remove("show");
+        }, 1500);
+      }).catch(err => {
+        alert("复制失败：" + err);
+      });
+    }
+  </script>
+  
+  
+  
+    <footer class="site-footer">
+      <div class="footer-columns">
+        <div class="footer-logo-group">
+          <img src="images/logo.png" class="footer-logo" alt="Logo" />
+          <div class="footer-icon-row">
+            <div class="icon-wrapper">
+              <img src="images/wechat.png" class="footer-icon" alt="WeChat" />
+              <div class="icon-tooltip">
+                <img src="images/wechat-details.png" alt="WeChat Detail" />
+              </div>
+            </div>
+            <div class="icon-wrapper">
+              <img src="images/email.png" class="footer-icon" alt="email" />
+              <div class="icon-tooltip">
+                <img src="images/email-details.png" alt="Email Detail" />
+                <button class="copy-button" onclick="copyEmail()">复制</button>
+              </div>
+            </div>
+            <div class="icon-wrapper">
+              <a href="https://www.xinpianchang.com/u13185465?badge=&cate_id=0&order=default&role_id=&public_status=0&kw=" target="_blank">
+                <img src="images/xinpianchang.png" class="footer-icon" alt="Xinpianchang" />
+              </a>
+              <div class="icon-tooltip">
+                <img src="images/xinpianchang-details.png" alt="XPC Detail" />
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <div class="footer-right-columns">
+          <div class="footer-column">
+            <h4>2024 WORKS</h4>
+            <ul>
+              <li><a href="from-the-corner.html">绝处逢生</a></li>
+        <li><a href="youth-never-ends.html">青春不散场</a></li>
+        <li><a href="change-starts-now.html">改变 就现在</a></li>
+        <li><a href="chao-neng.html">超能-助力不凡的你</a></li>
+            </ul>
+          </div>
+  
+          <div class="footer-column">
+            <h4>2023 WORKS</h4>
+            <ul>
+              <li><a href="blue-of-nbut.html">宁工蓝</a></li>
+              <li><a href="live-at-yunhu.html">隐居云湖</a></li>
+              <li><a href="wang-wang-miao.html">汪汪喵</a></li>
+            </ul>
+          </div>
+  
+          <div class="footer-column">
+            <h4>MOMENTS</h4>
+            <ul>
+              <li><a href="moments.html#college">校园</a></li>
+              <li><a href="moments.html#travel">旅途</a></li>
+              <li><a href="moments.html#nature">自然</a></li>
+            </ul>
+          </div>
+  
+          <div class="footer-column">
+            <h4>PHOTOGRAPHY</h4>
+            <ul>
+              <li><a href="photography.html#blue">蓝</a></li>
+              <li><a href="photography.html#orange">橙</a></li>
+              <li><a href="photography.html#green">绿</a></li>
+              <li><a href="photography.html#gray">灰</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <div id="copyToast" class="copy-toast">邮箱地址已复制</div>
+</body>
+</html>

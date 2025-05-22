@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>青春不散场 – Hank.Shao</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    html, body {
+      background-color: rgb(0, 0, 0);
+      color-scheme: light dark;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .detail-section {
+      max-width: 1200px;
+      margin: 160px auto 80px;
+      padding: 0 20px;
+      overflow: hidden;
+    }
+
+    .video-container {
+      aspect-ratio: 16 / 9;
+      background: black;
+      margin-bottom: 90px;
+      border-radius: 1px;
+      margin-top: 2.5em;
+      overflow: hidden;
+    }
+
+    .video-container video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background-color: black;
+      filter: brightness(0.95) contrast(1.15);
+    }
+
+    .back-button {
+        position: fixed;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%); /* 上下居中 */
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 0.8em 0.8em;
+  text-decoration: none;
+  font-size: 1em;
+  z-index: 100;
+  
+  transition: all 0.4s ease;
+  padding-left: 20px; /* 向右推一点 */
+  backdrop-filter: blur(5px);
+  width: 40px; /* 初始很窄 */
+  overflow: hidden;
+  white-space: nowrap;
+    }
+
+    .back-button:hover {
+  width: 200px; /* 悬停展开 */
+  background: rgba(255,255,255,0.1);
+  color: white;
+  
+}
+
+.back-button::before {
+  content: "<"; /* 小箭头 */
+  font-size: 1.2em;
+  display: inline-block;
+  margin-right: 10px;
+  margin-bottom: 6px;
+  transition: transform 0.4s ease;
+}
+
+.back-button:hover::before {
+  transform: translateX(5px); /* 悬停时箭头微微右移 */
+}
+
+    .main-title {
+      font-size: 5em;
+      
+      font-weight: bold;
+      margin-bottom: 0.6em;
+      color: white;
+      margin-top: -0.9em;       /* 控制它距上方视频的距离 */
+      margin-bottom: 0.3em; 
+    }
+
+    .film-meta {
+      font-size: 0.9em;
+      color: #bbb;
+      margin-bottom: 1.5em;
+    }
+
+    .info-columns {
+      display: flex;
+      flex-direction: row;
+      gap: 250px;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .left-col {
+      flex: 0.9;
+      min-width: 300px;
+    }
+
+    .right-col {
+        flex: 0.8;
+        transform: translateY(-50px); 
+    }
+
+    .left-col p {
+      margin-bottom: 1.5em;
+      color: #ccc;
+      line-height: 1.7em;
+    }
+
+    .right-col h3 {
+      color: white;
+      font-size: 1.2em;
+      margin-top: 0.4em;
+      margin-bottom: 0.6em;
+    }
+
+    .right-col p {
+      color: #ccc;
+      line-height: 1.6em;
+      font-size: 0.95em;
+      margin-bottom: 1.6em;
+      text-align: justify;
+    }
+    .intro {
+  font-style: italic;
+  color: #ccc;
+  margin-top: 1em;
+  margin-bottom: 1.8em;
+  line-height: 1.7em;
+}
+    .divider {
+  border: none;
+  height: 1px;
+  width: 60%;
+  background: rgba(254, 254, 254, 0.886);
+  margin: 2em 0;
+}
+
+/* style.css 中添加 */
+.screenshot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 2em;
+  margin: 15em 5vw;
+}
+
+.screenshot-grid img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 1px;
+  background: #222;
+}
+
+.screenshot-fullwidth {
+  width: 100vw;
+  background: black; /* 或者其他背景色 */
+  margin-left: calc(-1 * ((100vw - 100%) / 2)); /* 让内容撑出 container 的边界 */
+}
+
+
+
+
+
+  </style>
+</head>
+
+<body data-page="film-work">
+  <div class="navbar">
+    <div class="logo">
+        <a href="index.html">
+          <img src="images/logo.png" alt="Logo" class="logo-img" />
+        </a>
+      </div>
+      
+    <div class="nav-links">
+      <a href="index.html" class="nav-link" data-page="home">Home</a>
+      <a href="film-work.html" class="nav-link" data-page="film-work">Film Work</a>
+      <a href="moments.html" class="nav-link" data-page="moments">Moments</a>
+      <a href="photography.html" class="nav-link" data-page="photography">Photography</a>
+      <a href="about.html" class="nav-link" data-page="about">About</a>
+      <div class="nav-underline"></div>
+    </div>
+  </div>
+
+  <a href="film-work.html" class="back-button">Back to Film Work</a>
+
+
+  <div class="detail-section">
+    <div class="video-container">
+      <video controls preload="auto" playsinline poster="covers/youth-never-ends.jpg">
+        <source src="videos/youth-never-ends.mov" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    </div>
+
+    <div class="main-title">青春不散场</div>
+    <div class="film-meta">宁波工程学院2020级毕业短片｜2024.07｜5min</div>
+
+    <div class="info-columns">
+      <!-- 左栏内容 -->
+      <div class="left-col">
+        <p class="intro">
+            <em>四年的青春，即将落下帷幕。在即将分别的时刻，都用相片记录下最后的时光吧。让我们从这里再启程，去追寻更闪耀的明天。</em>
+
+        </p>
+        <hr class="divider" />
+        <p><strong>我的职位：</strong><br>导演｜摄影师｜剪辑｜调色</p>
+        <p><strong>出演：</strong><br>左家聿｜夏京渤｜陈家骏｜林亚妮｜吴泽悦</p>
+        <p><strong>团队：</strong><br>郑淇文｜俞扬凯｜王杰栋</p>
+        <p><strong>设备：</strong><br>SONY A7M4｜TAMRON 28-75mm F2.8<br>DJI RS3 PRO｜RAWRAY 600w｜RAWRAY 350w</p>
+      </div>
+    
+      <!-- 右栏内容 -->
+      <div class="right-col">
+        <h3>附言</h3>
+        <p>在大三即将结束之际，我接到了这项任务。项目周期被压缩地很短，仅仅只有两周时间需要完成前期策划到最终交片。在观看学习各大高校的案例之后，本次项目在情节构思和画面上进行了新的尝试。并且大部分镜头都附加1/4黑柔滤镜拍摄，为营造离别时刻的朦胧氛围打下基础。</p>
+      </div>
+    </div>
+
+  </div>
+  <div class="screenshot-fullwidth">
+    <div class="screenshot-grid">
+      <img src="screenshots/youth-never-ends/shot1.jpg" alt="截图1" />
+      <img src="screenshots/youth-never-ends/shot2.jpg" alt="截图2" />
+      <img src="screenshots/youth-never-ends/shot3.jpg" alt="截图3" />
+      <img src="screenshots/youth-never-ends/shot4.jpg" alt="截图4" />
+      <img src="screenshots/youth-never-ends/shot5.jpg" alt="截图5" />
+      <img src="screenshots/youth-never-ends/shot6.jpg" alt="截图6" />
+    </div>
+  </div>
+
+  <script>
+    const navLinks = document.querySelectorAll(".nav-link");
+    const underline = document.querySelector(".nav-underline");
+    const currentPage = document.body.dataset.page;
+
+    function moveUnderlineTo(el) {
+      const offsetLeft = el.offsetLeft;
+      const width = el.offsetWidth;
+      underline.style.left = offsetLeft + "px";
+      underline.style.width = width + "px";
+    }
+
+    const matchedLink = Array.from(navLinks).find(link => link.dataset.page === currentPage);
+    if (matchedLink) {
+      matchedLink.classList.add("active");
+      moveUnderlineTo(matchedLink);
+    }
+
+    navLinks.forEach(link => {
+      link.addEventListener("mouseenter", () => moveUnderlineTo(link));
+    });
+
+    document.querySelector(".nav-links").addEventListener("mouseleave", () => {
+      const activeLink = document.querySelector(".nav-link.active");
+      if (activeLink) moveUnderlineTo(activeLink);
+    });
+  </script>
+  <script>
+    function copyEmail() {
+      const email = "lszc024@163.com";
+      navigator.clipboard.writeText(email).then(() => {
+        const toast = document.getElementById("copyToast");
+        toast.classList.add("show");
+  
+        // 自动隐藏
+        setTimeout(() => {
+          toast.classList.remove("show");
+        }, 1500);
+      }).catch(err => {
+        alert("复制失败：" + err);
+      });
+    }
+  </script>
+  
+  
+  
+    <footer class="site-footer">
+      <div class="footer-columns">
+        <div class="footer-logo-group">
+          <img src="images/logo.png" class="footer-logo" alt="Logo" />
+          <div class="footer-icon-row">
+            <div class="icon-wrapper">
+              <img src="images/wechat.png" class="footer-icon" alt="WeChat" />
+              <div class="icon-tooltip">
+                <img src="images/wechat-details.png" alt="WeChat Detail" />
+              </div>
+            </div>
+            <div class="icon-wrapper">
+              <img src="images/email.png" class="footer-icon" alt="email" />
+              <div class="icon-tooltip">
+                <img src="images/email-details.png" alt="Email Detail" />
+                <button class="copy-button" onclick="copyEmail()">复制</button>
+              </div>
+            </div>
+            <div class="icon-wrapper">
+              <a href="https://www.xinpianchang.com/u13185465?badge=&cate_id=0&order=default&role_id=&public_status=0&kw=" target="_blank">
+                <img src="images/xinpianchang.png" class="footer-icon" alt="Xinpianchang" />
+              </a>
+              <div class="icon-tooltip">
+                <img src="images/xinpianchang-details.png" alt="XPC Detail" />
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <div class="footer-right-columns">
+          <div class="footer-column">
+            <h4>2024 WORKS</h4>
+            <ul>
+              <li><a href="from-the-corner.html">绝处逢生</a></li>
+        <li><a href="youth-never-ends.html">青春不散场</a></li>
+        <li><a href="change-starts-now.html">改变 就现在</a></li>
+        <li><a href="chao-neng.html">超能-助力不凡的你</a></li>
+            </ul>
+          </div>
+  
+          <div class="footer-column">
+            <h4>2023 WORKS</h4>
+            <ul>
+              <li><a href="blue-of-nbut.html">宁工蓝</a></li>
+              <li><a href="live-at-yunhu.html">隐居云湖</a></li>
+              <li><a href="wang-wang-miao.html">汪汪喵</a></li>
+            </ul>
+          </div>
+  
+          <div class="footer-column">
+            <h4>MOMENTS</h4>
+            <ul>
+              <li><a href="moments.html#college">校园</a></li>
+              <li><a href="moments.html#travel">旅途</a></li>
+              <li><a href="moments.html#nature">自然</a></li>
+            </ul>
+          </div>
+  
+          <div class="footer-column">
+            <h4>PHOTOGRAPHY</h4>
+            <ul>
+              <li><a href="photography.html#blue">蓝</a></li>
+              <li><a href="photography.html#orange">橙</a></li>
+              <li><a href="photography.html#green">绿</a></li>
+              <li><a href="photography.html#gray">灰</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <div id="copyToast" class="copy-toast">邮箱地址已复制</div>
+
+</body>
+</html>

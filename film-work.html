@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Film Work – Hank.Shao</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .section {
+      padding: 200px 40px 60px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    h2 {
+      font-size: 2.3em;
+      margin-bottom: 1em;
+      text-align: center;
+      font-family: 'Helvetica Now Display', 'Avenir Next', sans-serif;
+      letter-spacing: 5px;
+      font-weight: normal; /* 加上这一行，去掉默认加粗 */
+      transform: scaleY(0.9); /* Y轴缩放到80%，高度压扁 */
+      
+    }
+
+    .film-row {
+  display: flex;
+  flex-direction: row;
+  gap: 60px;
+  align-items: center;
+  min-height: 40vh;           /* 从 90vh 微调到 85vh */
+  padding: 3vh 0;             /* 缩小上下内边距 */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* 可选：淡淡分隔线 */
+}
+
+
+.preview-box {
+  position: relative;
+  width: 560px;
+  height: 316px; /* 16:9 比例 */
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: 8px;
+  background: black;
+}
+
+.preview-box .video-cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 2;
+  transition: opacity 0.3s ease;
+}
+
+  
+.preview-box video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.film-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 40px;
+  padding-top: 60px;
+}
+
+.film-card {
+  
+  
+  overflow: hidden;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.film-card:hover {
+  transform: translateY(-5px);
+}
+
+.video-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: black;
+}
+
+.video-wrapper video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.video-cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 2;
+  transition: opacity 0.3s ease;
+}
+
+.film-title {
+  margin-top: 1em;
+  font-size: 1.4em;
+  font-weight: bold;
+  color: white;
+}
+
+.film-meta {
+  font-size: 0.9em;
+  color: #aaa;
+  margin-top: 0.4em;
+  margin-bottom: 1em;
+}
+
+
+  </style>
+</head>
+<body data-page="film-work">
+  <div class="navbar">
+    <div class="logo">
+      <a href="index.html">
+        <img src="images/logo.png" alt="Logo" class="logo-img" />
+      </a>
+    </div>
+    
+    <div class="nav-links">
+      <a href="index.html" class="nav-link" data-page="home">Home</a>
+      <a href="film-work.html" class="nav-link" data-page="film-work">Film Work</a>
+      <a href="moments.html" class="nav-link" data-page="moments">Moments</a>
+      <a href="photography.html" class="nav-link" data-page="photography">Photography</a>
+      <a href="about.html" class="nav-link" data-page="about">About</a>
+      <div class="nav-underline"></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>MY SELECTED FILM WORKS</h2>
+
+    <!-- 作品列表 -->
+    <div class="film-grid">
+      <!-- 1. 绝处逢生 -->
+      <div class="film-card" data-link="from-the-corner.html">
+        <div class="video-wrapper">
+          <img class="video-cover" src="covers/from-the-corner.jpg" alt="封面" />
+          <video src="videos/from-the-corner.mp4" muted preload="metadata"></video>
+        </div>
+        <h3 class="film-title">绝处逢生</h3>
+        <p class="film-meta">剧情短片｜体育 青春｜10min｜2024.09</p>
+      </div>
+    
+      <!-- 2. 改变 就是现在 -->
+      <div class="film-card" data-link="change-starts-now.html">
+        <div class="video-wrapper">
+          <img class="video-cover" src="covers/change starts now.jpg" alt="封面" />
+          <video src="videos/change starts now.mp4" muted preload="metadata"></video>
+        </div>
+        <h3 class="film-title">改变 就是现在</h3>
+        <p class="film-meta">广告｜体育｜40s｜2024.12</p>
+      </div>
+    
+      <!-- 3. 青春不散场 -->
+      <div class="film-card" data-link="youth-never-ends.html">
+        <div class="video-wrapper">
+          <img class="video-cover" src="covers/youth-never-ends.jpg" alt="封面" />
+          <video src="videos/youth-never-ends.mov" muted preload="metadata"></video>
+        </div>
+        <h3 class="film-title">青春不散场</h3>
+        <p class="film-meta">剧情短片｜校园 青春｜5min｜2024.07</p>
+      </div>
+    
+      <!-- 4. 宁工蓝 -->
+      <div class="film-card" data-link="blue-of-nbut.html">
+        <div class="video-wrapper">
+          <img class="video-cover" src="covers/blue-of-nbut.jpg" alt="封面" />
+          <video src="videos/blue-of-nbut.mp4" muted preload="metadata"></video>
+        </div>
+        <h3 class="film-title">宁工蓝</h3>
+        <p class="film-meta">宣传片 ｜校园 青春 ｜3min｜2023.09</p>
+      </div>
+    
+      <!-- 5. 超能—助力不凡的你 -->
+      <div class="film-card" data-link="chao-neng.html">
+        <div class="video-wrapper">
+          <img class="video-cover" src="covers/chao-neng.jpg" alt="封面" />
+          <video src="videos/chao-neng.mp4" muted preload="metadata"></video>
+        </div>
+        <h3 class="film-title">超能—助力不凡的你</h3>
+        <p class="film-meta">剧情短片｜体育｜3min｜2024.05</p>
+      </div>
+    
+      <!-- 6. 隐居云湖 -->
+      <div class="film-card" data-link="live-at-yunhu.html">
+        <div class="video-wrapper">
+          <img class="video-cover" src="covers/live-at-yunhu.jpg" alt="封面" />
+          <video src="videos/live-at-yunhu.mp4" muted preload="metadata"></video>
+        </div>
+        <h3 class="film-title">隐居云湖</h3>
+        <p class="film-meta">宣传片｜旅游｜5min｜2023.09</p>
+      </div>
+    
+      <!-- 7. 超级邻居 -->
+      <div class="film-card" data-link="super-neighbor.html">
+        <div class="video-wrapper">
+          <img class="video-cover" src="covers/super-neighbor.jpg" alt="封面" />
+          <video src="videos/super-neighbor.mp4" muted preload="metadata"></video>
+        </div>
+        <h3 class="film-title">超级邻居</h3>
+        <p class="film-meta">宣传片｜汽车 校园｜5min｜2024.10</p>
+      </div>
+   
+     <!-- 8. 汪汪喵 -->
+     <div class="film-card" data-link="wang-wang-miao.html">
+       <div class="video-wrapper">
+          <img class="video-cover" src="covers/wang-wang-miao.jpg" alt="封面" />
+          <video src="videos/wang-wang-miao.mp4" muted preload="metadata"></video>
+       </div>
+       <h3 class="film-title">汪汪喵宠物净化器</h3>
+       <p class="film-meta">广告｜家电 产品｜50s｜2023.12</p>
+      </div>
+    </div>
+    
+
+    <script>
+      document.querySelectorAll(".film-card").forEach(card => {
+        const video = card.querySelector("video");
+        const cover = card.querySelector(".video-cover");
+        const wrapper = card.querySelector(".video-wrapper");
+    
+        wrapper.addEventListener("mousemove", e => {
+          if (!video.duration || video.readyState < 2) return;
+          const rect = wrapper.getBoundingClientRect();
+          const percent = (e.clientX - rect.left) / rect.width;
+          video.currentTime = percent * video.duration;
+        });
+    
+        wrapper.addEventListener("mouseenter", () => {
+          cover.style.opacity = "0";
+          video.play();
+        });
+    
+        wrapper.addEventListener("mouseleave", () => {
+          cover.style.opacity = "1";
+          video.pause();
+          video.currentTime = 0;
+        });
+    
+        card.addEventListener("click", () => {
+          const link = card.dataset.link;
+          if (link) window.location.href = link;
+        });
+      });
+    </script>
+    <script>
+      window.addEventListener("DOMContentLoaded", () => {
+        const navLinks = document.querySelectorAll(".nav-link");
+        const underline = document.querySelector(".nav-underline");
+        const currentPage = document.body.dataset.page;
+    
+        function moveUnderlineTo(el) {
+          const offsetLeft = el.offsetLeft;
+          const width = el.offsetWidth;
+          underline.style.left = offsetLeft + "px";
+          underline.style.width = width + "px";
+        }
+    
+        const matchedLink = Array.from(navLinks).find(link => link.dataset.page === currentPage);
+        if (matchedLink) {
+          matchedLink.classList.add("active");
+          moveUnderlineTo(matchedLink);
+        }
+    
+        navLinks.forEach(link => {
+          link.addEventListener("mouseenter", () => moveUnderlineTo(link));
+        });
+    
+        document.querySelector(".nav-links").addEventListener("mouseleave", () => {
+          const activeLink = document.querySelector(".nav-link.active");
+          if (activeLink) moveUnderlineTo(activeLink);
+        });
+      });
+    </script>
+    
+
+
+
+  </script>
+  <script>
+    function copyEmail() {
+      const email = "lszc024@163.com";
+      navigator.clipboard.writeText(email).then(() => {
+        const toast = document.getElementById("copyToast");
+        toast.classList.add("show");
+  
+        // 自动隐藏
+        setTimeout(() => {
+          toast.classList.remove("show");
+        }, 1500);
+      }).catch(err => {
+        alert("复制失败：" + err);
+      });
+    }
+  </script>
+  
+  
+  
+    <footer class="site-footer">
+      <div class="footer-columns">
+        <div class="footer-logo-group">
+          <img src="images/logo.png" class="footer-logo" alt="Logo" />
+          <div class="footer-icon-row">
+            <div class="icon-wrapper">
+              <img src="images/wechat.png" class="footer-icon" alt="WeChat" />
+              <div class="icon-tooltip">
+                <img src="images/wechat-details.png" alt="WeChat Detail" />
+              </div>
+            </div>
+            <div class="icon-wrapper">
+              <img src="images/email.png" class="footer-icon" alt="email" />
+              <div class="icon-tooltip">
+                <img src="images/email-details.png" alt="Email Detail" />
+                <button class="copy-button" onclick="copyEmail()">复制</button>
+              </div>
+            </div>
+            <div class="icon-wrapper">
+              <a href="https://www.xinpianchang.com/u13185465?badge=&cate_id=0&order=default&role_id=&public_status=0&kw=" target="_blank">
+                <img src="images/xinpianchang.png" class="footer-icon" alt="Xinpianchang" />
+              </a>
+              <div class="icon-tooltip">
+                <img src="images/xinpianchang-details.png" alt="XPC Detail" />
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <div class="footer-right-columns">
+          <div class="footer-column">
+            <h4>2024 WORKS</h4>
+            <ul>
+              <li><a href="from-the-corner.html">绝处逢生</a></li>
+        <li><a href="youth-never-ends.html">青春不散场</a></li>
+        <li><a href="change-starts-now.html">改变 就现在</a></li>
+        <li><a href="chao-neng.html">超能-助力不凡的你</a></li>
+            </ul>
+          </div>
+  
+          <div class="footer-column">
+            <h4>2023 WORKS</h4>
+            <ul>
+              <li><a href="blue-of-nbut.html">宁工蓝</a></li>
+              <li><a href="live-at-yunhu.html">隐居云湖</a></li>
+              <li><a href="wang-wang-miao.html">汪汪喵</a></li>
+            </ul>
+          </div>
+  
+          <div class="footer-column">
+            <h4>MOMENTS</h4>
+            <ul>
+              <li><a href="moments.html#college">校园</a></li>
+              <li><a href="moments.html#travel">旅途</a></li>
+              <li><a href="moments.html#nature">自然</a></li>
+            </ul>
+          </div>
+  
+          <div class="footer-column">
+            <h4>PHOTOGRAPHY</h4>
+            <ul>
+              <li><a href="photography.html#blue">蓝</a></li>
+              <li><a href="photography.html#orange">橙</a></li>
+              <li><a href="photography.html#green">绿</a></li>
+              <li><a href="photography.html#gray">灰</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <div id="copyToast" class="copy-toast">邮箱地址已复制</div>
+</body>
+</html>
